@@ -8,9 +8,15 @@ import { OfflineIndicator, useOfflineStore } from '@/hooks/useOfflineSync';
 function ServiceWorkerRegistrar() {
   useEffect(() => {
     if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js', { scope: '/' })
-        .then(reg => console.log('[SW] Registered:', reg.scope))
-        .catch(err => console.warn('[SW] Registration failed:', err));
+      if (process.env.NODE_ENV !== 'production') {
+        navigator.serviceWorker.getRegistrations()
+          .then(registrations => Promise.all(registrations.map(reg => reg.unregister())))
+          .catch(() => undefined);
+      } else {
+        navigator.serviceWorker.register('/sw.js', { scope: '/' })
+          .then(reg => console.log('[SW] Registered:', reg.scope))
+          .catch(err => console.warn('[SW] Registration failed:', err));
+      }
     }
     const store = useOfflineStore.getState();
     const handleOnline = () => store.setOnline(true);
