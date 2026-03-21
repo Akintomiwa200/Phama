@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+
+/* =========================
+   THEME (Tailwind v4)
+========================= */
+@theme {
+  --color-background: hsl(210 40% 98%);
+  --color-foreground: hsl(222 47% 11%);
+  --color-card: hsl(0 0% 100%);
+  --color-border: hsl(214 32% 91%);
+  --color-primary: hsl(199 89% 48%);
+}
+
+/* Dark Mode */
+.dark {
+  --color-background: hsl(224 71% 4%);
+  --color-foreground: hsl(213 31% 91%);
+  --color-card: hsl(224 71% 6%);
+}
+
+/* =========================
+   BASE STYLES
+========================= */
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'DM Sans', system-ui, sans-serif;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Syne', sans-serif;
+  }
+}
+
+/* =========================
+   COMPONENTS
+========================= */
+@layer components {
+
+  .glass {
+    @apply backdrop-blur-md bg-white/10 border border-white/20;
+  }
+
+  .glass-dark {
+    @apply backdrop-blur-md bg-black/20 border border-white/10;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5;
+  }
+
+  .btn-primary {
+    @apply bg-sky-500 hover:bg-sky-600 text-white font-semibold rounded-xl px-6 py-3 transition-all duration-200 shadow;
+  }
+
+  .input-field {
+    @apply w-full rounded-xl border px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500;
+  }
+
+  .nav-link {
+    @apply flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-gray-500 hover:text-black hover:bg-gray-100 transition;
+  }
+
+  .nav-link.active {
+    @apply bg-sky-100 text-sky-600;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-2 py-1 rounded-md text-xs font-medium;
+  }
+
+}
+
+/* =========================
+   UTILITIES
+========================= */
+@layer utilities {
+
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 0.4s ease-out;
+  }
+
+}
+
+/* =========================
+   SCROLLBAR
+========================= */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(14,165,233,0.4);
+  border-radius: 999px;
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
