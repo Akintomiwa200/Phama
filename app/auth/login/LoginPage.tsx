@@ -4,9 +4,20 @@ import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { Pill, Eye, EyeOff, Mail, Lock, AlertCircle, Chrome } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { 
+  Pill, 
+  Eye, 
+  EyeOff, 
+  Mail, 
+  Lock, 
+  AlertCircle, 
+  CheckCircle,
+  Sparkles,
+  Shield,
+  Clock
+} from 'lucide-react';
 import { Spinner } from '@/components/shared';
-import { cn } from '@/utils';
 import toast from 'react-hot-toast';
 
 export function LoginPage() {
@@ -45,37 +56,45 @@ export function LoginPage() {
     await signIn('google', { callbackUrl });
   };
 
-  const DEMO_ACCOUNTS = [
-    { label: 'Super Admin', email: 'admin@pharmaconnect.com', password: 'Admin@123', color: 'text-red-500' },
-    { label: 'Wholesaler', email: 'wholesale@pharmaconnect.com', password: 'Demo@123', color: 'text-blue-500' },
-    { label: 'Retailer', email: 'retail@pharmaconnect.com', password: 'Demo@123', color: 'text-emerald-500' },
-    { label: 'Consumer', email: 'consumer@pharmaconnect.com', password: 'Demo@123', color: 'text-purple-500' },
-  ];
-
   return (
-    <div className="min-h-screen bg-background flex">
+    <div className="min-h-screen bg-white flex">
       {/* Left panel — branding */}
-      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-pharma-900 via-pharma-800 to-slate-900 flex-col justify-between p-12 relative overflow-hidden">
-        {/* Bg decoration */}
+      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-emerald-900 via-emerald-800 to-teal-900 flex-col justify-between p-12 relative overflow-hidden">
+        {/* Background decoration */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute -top-24 -left-24 w-96 h-96 bg-pharma-500/10 rounded-full blur-3xl" />
-          <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-pharma-400/5 rounded-full blur-2xl" />
+          <div className="absolute -top-24 -left-24 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl" />
+          <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-emerald-400/5 rounded-full blur-2xl" />
         </div>
 
         <div className="relative z-10">
           <div className="flex items-center gap-3 mb-16">
-            <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-pharma-400 to-pharma-600 flex items-center justify-center shadow-lg shadow-pharma-500/30">
+            <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center shadow-lg shadow-emerald-500/30">
               <Pill className="w-6 h-6 text-white" />
             </div>
-            <span className="font-display font-bold text-white text-xl">PharmaConnect</span>
+            <span className="font-bold text-white text-xl">pharma<span className="text-emerald-300">connect</span></span>
           </div>
-          <h1 className="font-display text-4xl xl:text-5xl font-bold text-white leading-tight mb-6">
-            The smarter way to manage pharmacy
-          </h1>
-          <p className="text-pharma-200 text-lg leading-relaxed">
-            Connect wholesalers, retailers, and consumers in one intelligent platform — powered by AI drug intelligence and real-time insights.
-          </p>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6">
+              <Sparkles className="w-4 h-4 text-emerald-300" />
+              <span className="text-sm font-medium text-white">AI-Powered Healthcare Platform</span>
+            </div>
+            
+            <h1 className="text-4xl xl:text-5xl font-bold text-white leading-tight mb-6">
+              Welcome to the future of
+              <span className="text-emerald-300"> pharmacy management</span>
+            </h1>
+            
+            <p className="text-emerald-100 text-lg leading-relaxed">
+              Connect wholesalers, pharmacies, providers, and patients in one intelligent platform — 
+              powered by AI drug intelligence and real-time insights.
+            </p>
+          </motion.div>
         </div>
 
         <div className="relative z-10 grid grid-cols-2 gap-4">
@@ -84,90 +103,120 @@ export function LoginPage() {
             { icon: '🏪', label: 'Pharmacies', desc: 'Full POS & inventory' },
             { icon: '👤', label: 'Consumers', desc: 'AI health companion' },
             { icon: '🤖', label: 'AI-Powered', desc: 'Smart recommendations' },
-          ].map(item => (
-            <div key={item.label} className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-4">
+          ].map((item, idx) => (
+            <motion.div
+              key={item.label}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 + idx * 0.1 }}
+              className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-4 hover:bg-white/10 transition-colors"
+            >
               <div className="text-2xl mb-2">{item.icon}</div>
               <div className="text-white font-semibold text-sm">{item.label}</div>
-              <div className="text-pharma-300 text-xs">{item.desc}</div>
-            </div>
+              <div className="text-emerald-300 text-xs">{item.desc}</div>
+            </motion.div>
           ))}
         </div>
       </div>
 
       {/* Right panel — form */}
-      <div className="flex-1 flex items-center justify-center p-8">
-        <div className="w-full max-w-md">
+      <div className="flex-1 flex items-center justify-center p-6 md:p-8">
+        <motion.div 
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+          className="w-full max-w-md"
+        >
           {/* Mobile logo */}
-          <div className="flex items-center gap-3 mb-10 lg:hidden">
-            <div className="w-10 h-10 rounded-xl bg-pharma-500 flex items-center justify-center">
+          <div className="flex items-center gap-3 mb-8 lg:hidden">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg">
               <Pill className="w-5 h-5 text-white" />
             </div>
-            <span className="font-display font-bold text-xl">PharmaConnect</span>
+            <span className="font-bold text-xl text-gray-900">pharma<span className="text-emerald-600">connect</span></span>
           </div>
 
           <div className="mb-8">
-            <h2 className="font-display text-3xl font-bold mb-2">Welcome back</h2>
-            <p className="text-muted-foreground">Sign in to your account to continue</p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">Welcome back</h2>
+            <p className="text-gray-600">Sign in to your account to continue</p>
           </div>
 
           {error && (
-            <div className="flex items-center gap-3 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-2xl mb-6 text-sm text-red-700 dark:text-red-400">
+            <motion.div 
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="flex items-center gap-3 p-4 bg-red-50 border border-red-200 rounded-2xl mb-6 text-sm text-red-700"
+            >
               <AlertCircle className="w-4 h-4 flex-shrink-0" />
               {error}
-            </div>
+            </motion.div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="text-sm font-medium mb-1.5 block">Email address</label>
+              <label className="text-sm font-medium text-gray-700 mb-1.5 block">Email address</label>
               <div className="relative">
-                <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                 <input
                   type="email"
                   value={email}
                   onChange={e => setEmail(e.target.value)}
                   placeholder="you@example.com"
-                  className="input-field pl-10"
+                  className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 bg-white focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100 transition-all outline-none text-gray-900 placeholder:text-gray-400"
                   required
                   autoComplete="email"
                 />
               </div>
             </div>
+            
             <div>
               <div className="flex justify-between mb-1.5">
-                <label className="text-sm font-medium">Password</label>
-                <a href="#" className="text-xs text-pharma-500 hover:underline">Forgot password?</a>
+                <label className="text-sm font-medium text-gray-700">Password</label>
+                <Link href="/auth/forgot-password" className="text-xs text-emerald-600 hover:text-emerald-700 font-medium transition-colors">
+                  Forgot password?
+                </Link>
               </div>
               <div className="relative">
-                <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                 <input
                   type={showPw ? 'text' : 'password'}
                   value={password}
                   onChange={e => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="input-field pl-10 pr-10"
+                  className="w-full pl-10 pr-10 py-3 rounded-xl border border-gray-200 bg-white focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100 transition-all outline-none text-gray-900"
                   required
                   autoComplete="current-password"
                 />
-                <button type="button" onClick={() => setShowPw(!showPw)} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground">
+                <button 
+                  type="button" 
+                  onClick={() => setShowPw(!showPw)} 
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                >
                   {showPw ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
               </div>
             </div>
 
-            <button type="submit" disabled={loading} className="w-full btn-primary py-3.5 flex items-center justify-center gap-2 disabled:opacity-50 mt-2">
+            <button 
+              type="submit" 
+              disabled={loading} 
+              className="w-full py-3.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-semibold shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-300 disabled:opacity-50 disabled:hover:scale-100 flex items-center justify-center gap-2 mt-2"
+            >
               {loading ? <Spinner size="sm" /> : null}
               {loading ? 'Signing in...' : 'Sign in'}
             </button>
           </form>
 
           <div className="flex items-center gap-4 my-6">
-            <div className="flex-1 border-t" />
-            <span className="text-xs text-muted-foreground">or</span>
-            <div className="flex-1 border-t" />
+            <div className="flex-1 border-t border-gray-200" />
+            <span className="text-xs text-gray-400">or</span>
+            <div className="flex-1 border-t border-gray-200" />
           </div>
 
-          <button onClick={handleGoogle} disabled={googleLoading} className="w-full flex items-center justify-center gap-3 py-3 border rounded-xl hover:bg-muted transition-colors text-sm font-medium disabled:opacity-50">
+          <button 
+            onClick={handleGoogle} 
+            disabled={googleLoading} 
+            className="w-full flex items-center justify-center gap-3 py-3 border border-gray-200 rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 text-sm font-medium text-gray-700 disabled:opacity-50"
+          >
             {googleLoading ? <Spinner size="sm" /> : (
               <svg className="w-4 h-4" viewBox="0 0 24 24">
                 <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
@@ -179,28 +228,29 @@ export function LoginPage() {
             Continue with Google
           </button>
 
-          <p className="text-center text-sm text-muted-foreground mt-6">
-            Don&apos;t have an account?{' '}
-            <Link href="/auth/register" className="text-pharma-500 font-medium hover:underline">Create account</Link>
+          <p className="text-center text-sm text-gray-500 mt-6">
+            Don't have an account?{' '}
+            <Link href="/auth/register" className="text-emerald-600 font-medium hover:text-emerald-700 hover:underline transition-colors">
+              Create account
+            </Link>
           </p>
 
-          {/* Demo accounts */}
-          <div className="mt-8 p-4 bg-muted/50 rounded-2xl border">
-            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">Demo Accounts</p>
-            <div className="grid grid-cols-2 gap-2">
-              {DEMO_ACCOUNTS.map(acc => (
-                <button
-                  key={acc.label}
-                  onClick={() => { setEmail(acc.email); setPassword(acc.password); }}
-                  className="text-left p-2.5 rounded-xl hover:bg-card transition-colors border border-transparent hover:border-border"
-                >
-                  <div className={cn('text-xs font-semibold', acc.color)}>{acc.label}</div>
-                  <div className="text-xs text-muted-foreground truncate">{acc.email}</div>
-                </button>
-              ))}
+          {/* Trust indicators */}
+          <div className="mt-8 flex flex-wrap justify-center gap-4 text-xs text-gray-400">
+            <div className="flex items-center gap-1">
+              <CheckCircle className="w-3 h-3" />
+              <span>HIPAA compliant</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <Shield className="w-3 h-3" />
+              <span>Bank-grade security</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <Clock className="w-3 h-3" />
+              <span>24/7 support</span>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
