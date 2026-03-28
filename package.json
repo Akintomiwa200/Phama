@@ -2,15 +2,11 @@
   "name": "pharmaconnect",
   "version": "1.0.0",
   "private": true,
-  "packageManager": "pnpm@9.0.0",
-  "engines": {
-    "node": ">=20.9.0"
-  },
   "scripts": {
-    "dev": "node ./node_modules/next/dist/bin/next dev",
-    "build": "node ./node_modules/next/dist/bin/next build",
-    "start": "node ./node_modules/next/dist/bin/next start",
-    "lint": "node ./node_modules/next/dist/bin/next lint",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "db:generate": "drizzle-kit generate",
