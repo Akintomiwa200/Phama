@@ -1,4 +1,4 @@
-'use client';
+'use client'
 
 import { PageHeader, StatCard, DataTable, StatusBadge } from '@/components/shared';
 import { RevenueChart, TopItemsList, SalesBarChart } from '@/components/charts';

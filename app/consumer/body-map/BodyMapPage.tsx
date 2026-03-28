@@ -1,4 +1,4 @@
-'use client';
+'use client'
 
 import { useState } from 'react';
 import { BodyMap3D, SymptomSelector, BODY_PART_LABELS } from '@/components/three/BodyMap3D';
