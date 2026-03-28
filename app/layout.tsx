@@ -32,9 +32,7 @@ export const metadata: Metadata = {
   description:
     'Full-stack pharmaceutical platform connecting wholesalers, retailers, and consumers with AI-powered drug intelligence.',
   keywords: ['pharmacy', 'pharmaceutical', 'drug', 'medicine', 'healthcare', 'AI'],
-  authors: [{ name: 'PharmaConnect' }],
-  viewport: 'width=device-width, initial-scale=1',
-  themeColor: '#0ea5e9',
+  authors: [{ name: 'Herkintormiwer' }],
   manifest: '/manifest.json',
 };
 
