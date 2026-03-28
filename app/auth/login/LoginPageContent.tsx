@@ -20,7 +20,7 @@ import {
 import { Spinner } from '@/components/shared';
 import toast from 'react-hot-toast';
 
-export function LoginPage() {
+export function LoginPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get('callbackUrl') || '/consumer/home';
