@@ -31,33 +31,46 @@ export const metadata: Metadata = {
   },
   description:
     'Full-stack pharmaceutical platform connecting wholesalers, retailers, and consumers with AI-powered drug intelligence.',
-  keywords: ['pharmacy', 'pharmaceutical', 'drug', 'medicine', 'healthcare', 'AI'],
+  keywords: [
+    'pharmacy',
+    'pharmaceutical',
+    'drug',
+    'medicine',
+    'healthcare',
+    'AI',
+  ],
   authors: [{ name: 'Herkintormiwer' }],
   manifest: '/manifest.json',
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
+        suppressHydrationWarning
         className={`${syne.variable} ${dmSans.variable} ${dmMono.variable} font-body antialiased`}
       >
         <Providers>
           {children}
-          <Toaster
-            position="top-right"
-            toastOptions={{
-              duration: 4000,
-              style: {
-                background: '#0f172a',
-                color: '#f1f5f9',
-                border: '1px solid rgba(14,165,233,0.2)',
-                borderRadius: '12px',
-                fontSize: '13px',
-              },
-            }}
-          />
         </Providers>
+
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            duration: 4000,
+            style: {
+              background: '#0f172a',
+              color: '#f1f5f9',
+              border: '1px solid rgba(14,165,233,0.2)',
+              borderRadius: '12px',
+              fontSize: '13px',
+            },
+          }}
+        />
       </body>
     </html>
   );
